@@ -3,7 +3,7 @@ package org.codewars.kata;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-public class StringEndsWithKataTest {
+public class StringEndsWithTest {
     @Test
     public void staticTests() {
         check("samurai", "ai", true);
@@ -24,7 +24,7 @@ public class StringEndsWithKataTest {
     }
 
     private static void check(String str, String ending, boolean expected) {
-        boolean result = StringEndsWithKata.endsWith(str, ending);
+        boolean result = StringEndsWith.endsWith(str, ending);
         assertEquals("Expected solution(\"" + str + "\", \"" + ending + "\") to return " + expected, expected, result);
     }
 }
