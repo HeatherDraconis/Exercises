@@ -1,12 +1,13 @@
 package org.codewars.kata;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.params.provider.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class TwoSumTest {
+public class TwoSumTest {
     static Stream<Arguments> basicTests() {
         return Stream.of(
                 arguments(new int[]{1,2,3},          4,     new int[]{0,2}),
@@ -19,7 +20,7 @@ class TwoSumTest {
     @MethodSource
     @DisplayName("Basic tests")
     void basicTests(int[] numbers, int target, int[] expected) {
-        int[] actual = Solution.twoSum(numbers.clone(), target);
+        int[] actual = TwoSum.twoSum(numbers.clone(), target);
         assertNotNull(actual, "Should return an array");
         assertEquals(2, actual.length, "Returned array must be of length 2");
         assertNotEquals(actual[0], actual[1], "Indices must be distinct");
