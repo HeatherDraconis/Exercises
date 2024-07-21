@@ -1,13 +1,15 @@
 package org.codewars.kata;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CamelTest {
     @Test
     public void tests() {
-        assertEquals( "Incorrect", "camel Casing", Camel.camelCase("camelCasing"));
-        assertEquals( "Incorrect", "camel Casing Test", Camel.camelCase("camelCasingTest"));
-        assertEquals( "Incorrect", "camelcasingtest", Camel.camelCase("camelcasingtest"));
+        assertEquals( "camel Casing", Camel.camelCase("camelCasing"));
+        assertEquals( "camel Casing Test", Camel.camelCase("camelCasingTest"));
+        assertEquals( "camelcasingtest", Camel.camelCase("camelcasingtest"));
     }
 }

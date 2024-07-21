@@ -1,7 +1,8 @@
 package org.codewars.kata;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringEndsWithTest {
     @Test
@@ -25,6 +26,6 @@ public class StringEndsWithTest {
 
     private static void check(String str, String ending, boolean expected) {
         boolean result = StringEndsWith.endsWith(str, ending);
-        assertEquals("Expected solution(\"" + str + "\", \"" + ending + "\") to return " + expected, expected, result);
+        assertEquals(expected, result);
     }
 }
