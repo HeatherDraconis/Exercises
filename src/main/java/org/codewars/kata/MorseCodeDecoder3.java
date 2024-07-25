@@ -11,43 +11,49 @@ public class MorseCodeDecoder3 {
         int longSpaceLength = bits.length();
         int dotLength = bits.length();
         int dashLength = bits.length();
-        int longestSLength = 0;
-        int shortestSLength = bits.length();
-        int longestDLength = 0;
-        int shortestDLength = bits.length();
         for (int i = 0; i < bitsArray.length; i++) {
             if (bitsArray[i].startsWith("0")) {
-                if (bitsArray[i].length() < shortestSLength) {
-                    shortestSLength = bitsArray[i].length();
+                if (bitsArray[i].length() < noSpaceLength) {
+                    longSpaceLength = shortSpaceLength;
+                    shortSpaceLength = noSpaceLength;
+                    noSpaceLength = bitsArray[i].length();
                 }
-                if (bitsArray[i].length() > longestSLength) {
-                    longestSLength = bitsArray[i].length();
+                else if ((bitsArray[i].length() < shortSpaceLength) && (bitsArray[i].length() > noSpaceLength)) {
+                    longSpaceLength = shortSpaceLength;
+                    shortSpaceLength = bitsArray[i].length();
+                }
+                else if ((bitsArray[i].length() < longSpaceLength) && (bitsArray[i].length() > noSpaceLength)) {
+                    longSpaceLength = bitsArray[i].length();
                 }
             }
             if (bitsArray[i].startsWith("1")) {
-                if (bitsArray[i].length() < shortestDLength) {
-                    shortestDLength = bitsArray[i].length();
+                if (bitsArray[i].length() < dotLength) {
+                    dashLength = dotLength;
+                    dotLength = bitsArray[i].length();
                 }
-                if (bitsArray[i].length() > longestDLength) {
-                    longestDLength = bitsArray[i].length();
+                else if ((bitsArray[i].length() < dashLength) && (bitsArray[i].length() > dotLength)) {
+                    dashLength = bitsArray[i].length();
                 }
             }
         }
         StringBuilder stringBuilder = new StringBuilder();
         for (int j = 0; j < bitsArray.length; j++) {
             if (bitsArray[j].startsWith("0")) {
-                if (bitsArray[j].length() == shortSpaceLength) {
+                if (bitsArray[j].length() <= noSpaceLength + 2) {
+                    stringBuilder.append("");
+                }
+                else if (bitsArray[j].length() <= shortSpaceLength + 2) {
                     stringBuilder.append(" ");
                 }
-                if (bitsArray[j].length() == longSpaceLength) {
+                else if (bitsArray[j].length() >= longSpaceLength - 2) {
                     stringBuilder.append("   ");
                 }
             }
             if (bitsArray[j].startsWith("1")) {
-                if (bitsArray[j].length() == dotLength) {
+                if (bitsArray[j].length() <= dotLength + 2) {
                     stringBuilder.append(".");
                 }
-                if (bitsArray[j].length() == dashLength) {
+                else if (bitsArray[j].length() >= dashLength - 2) {
                     stringBuilder.append("-");
                 }
             }
