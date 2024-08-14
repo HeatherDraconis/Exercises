@@ -1,59 +1,62 @@
 package org.codewars.kata;
 
+import java.util.Arrays;
+
 public class MorseCodeDecoder3 {
     public static String decodeBitsAdvanced(String bits) {
         bits = bits.replaceAll("0", " ").trim().replaceAll(" ", "0");
         bits = bits.replaceAll("01", "0 1");
         bits = bits.replaceAll("10", "1 0");
         String[] bitsArray = bits.split(" ");
-        int noSpaceLength = bits.length();
-        int shortSpaceLength = bits.length();
-        int longSpaceLength = bits.length();
-        int dotLength = bits.length();
-        int dashLength = bits.length();
+
+        Integer[] signalArray = new Integer[bitsArray.length];
         for (int i = 0; i < bitsArray.length; i++) {
-            if (bitsArray[i].startsWith("0")) {
-                if (bitsArray[i].length() < noSpaceLength) {
-                    longSpaceLength = shortSpaceLength;
-                    shortSpaceLength = noSpaceLength;
-                    noSpaceLength = bitsArray[i].length();
-                }
-                else if ((bitsArray[i].length() < shortSpaceLength) && (bitsArray[i].length() > noSpaceLength)) {
-                    longSpaceLength = shortSpaceLength;
-                    shortSpaceLength = bitsArray[i].length();
-                }
-                else if ((bitsArray[i].length() < longSpaceLength) && (bitsArray[i].length() > noSpaceLength)) {
-                    longSpaceLength = bitsArray[i].length();
-                }
-            }
-            if (bitsArray[i].startsWith("1")) {
-                if (bitsArray[i].length() < dotLength) {
-                    dashLength = dotLength;
-                    dotLength = bitsArray[i].length();
-                }
-                else if ((bitsArray[i].length() < dashLength) && (bitsArray[i].length() > dotLength)) {
-                    dashLength = bitsArray[i].length();
-                }
+            signalArray[i] = bitsArray[i].length();
+        }
+        Arrays.sort(signalArray);
+        int smallLength = signalArray[0];
+        int largeLength = signalArray[bitsArray.length - 1];
+
+        Integer[] gapsArray = new Integer[largeLength - smallLength + 1];
+        for (int i = smallLength; i < largeLength - smallLength + 1; i++) {
+            if (!Arrays.toString(signalArray).contains(i + "")) {
+                gapsArray[i] = i + smallLength - 1;
             }
         }
+
+        int gap1 = bits.length() + 1;
+        int gap2 = bits.length() + 1;
+
+        for (int i = 0; i < gapsArray.length; i++) {
+            if (gapsArray[i] != null && gap1 == bits.length() + 1) {
+                gap1 = gapsArray[i];
+            }
+        }
+
+        for (int i = gapsArray.length -1 ; i >= 0; i--) {
+            if (gapsArray[i] != null && gapsArray[i] > gap1 && gap2 == bits.length() + 1) {
+                gap2 = gapsArray[i];
+            }
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
         for (int j = 0; j < bitsArray.length; j++) {
             if (bitsArray[j].startsWith("0")) {
-                if (bitsArray[j].length() <= noSpaceLength + 2) {
+                if (bitsArray[j].length() <= gap1) {
                     stringBuilder.append("");
                 }
-                else if (bitsArray[j].length() <= shortSpaceLength + 2) {
+                else if (bitsArray[j].length() <= gap2) {
                     stringBuilder.append(" ");
                 }
-                else if (bitsArray[j].length() >= longSpaceLength - 2) {
+                else {
                     stringBuilder.append("   ");
                 }
             }
             if (bitsArray[j].startsWith("1")) {
-                if (bitsArray[j].length() <= dotLength + 2) {
+                if (bitsArray[j].length() <= gap1) {
                     stringBuilder.append(".");
                 }
-                else if (bitsArray[j].length() >= dashLength - 2) {
+                else {
                     stringBuilder.append("-");
                 }
             }
