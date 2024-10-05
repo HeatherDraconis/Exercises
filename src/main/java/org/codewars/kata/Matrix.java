@@ -1,7 +1,4 @@
 package org.codewars.kata;
-
-import java.util.Arrays;
-
 public class Matrix {
     public static int determinant(int[][] matrix) {
         if (matrix.length == 1) {
