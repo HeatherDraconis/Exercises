@@ -7,9 +7,6 @@ public class Matrix {
         if (matrix.length == 1) {
             return matrix[0][0];
         }
-        if (matrix.length == 2) {
-            return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
-        }
         int det = 0;
         int sign = 1;
         for (int i = 0; i < matrix[0].length; i++) {
