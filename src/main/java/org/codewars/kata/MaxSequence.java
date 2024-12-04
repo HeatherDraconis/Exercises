@@ -1,7 +1,5 @@
 package org.codewars.kata;
 
-import java.util.Arrays;
-
 public class MaxSequence {
     public static int sequence(int[] arr) {
         int greatestSum = 0;

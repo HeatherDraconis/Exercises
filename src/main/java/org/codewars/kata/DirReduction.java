@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
-
 public class DirReduction {
     public static String[] dirReduc(String[] arr) {
         List<String> arrList = new ArrayList<>(Arrays.asList(arr));
@@ -27,17 +24,17 @@ public class DirReduction {
 
     private static boolean comparison(String term1, String term2) {
         if (term1.equals("NORTH") && term2.equals("SOUTH")) {
-            return TRUE;
+            return true;
         }
         if (term1.equals("SOUTH") && term2.equals("NORTH")) {
-            return TRUE;
+            return true;
         }
         if (term1.equals("EAST") && term2.equals("WEST")) {
-            return TRUE;
+            return true;
         }
         if (term1.equals("WEST") && term2.equals("EAST")) {
-            return TRUE;
+            return true;
         }
-        return FALSE;
+        return false;
     }
 }

@@ -1,7 +1,6 @@
 package org.codewars.kata;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class TimeFormatter {
     public static String formatDuration(int seconds) {
